@@ -1,0 +1,9 @@
+TARUH FOTO KAMU DI SINI.
+
+Rename file foto kamu menjadi: profile.jpg (atau profile.png)
+lalu simpan di folder ini: Web Portofolio Faisal/public/
+
+Contoh hasil akhirnya:
+  Web Portofolio Faisal/public/profile.jpg
+
+Setelah itu web otomatis akan menampilkan fotomu!
