@@ -39,7 +39,7 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#09090b] text-zinc-100 cyber-grid selection:bg-zinc-800 selection:text-white font-['Plus_Jakarta_Sans',sans-serif]">
       {/* Background Galaxy Asli (Sudah dioptimasi agar ringan & tidak lag saat zoom) */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-85">
+      <div className="hidden md:block fixed inset-0 z-0 pointer-events-none opacity-85">
         <Galaxy
           mouseRepulsion={false}
           mouseInteraction={false}
