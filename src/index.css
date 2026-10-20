@@ -59,8 +59,8 @@ body {
 }
 
 .mobile-soft-bg {
-  /* Kombinasi hitam pekat + warna kabut abu-biru pekat */
-  background: linear-gradient(-45deg, #09090b, #111827, #1e293b, #09090b);
+  /* Kombinasi hitam pekat (#09090b) & abu-abu kabut gelap (#18181b & #27272a) */
+  background: linear-gradient(-45deg, #09090b, #18181b, #27272a, #09090b);
   background-size: 300% 300%;
-  animation: floatGradient 7s ease infinite; /* 7 detik biar pergerakan kabutnya pas */
+  animation: floatGradient 7s ease infinite;
 }
