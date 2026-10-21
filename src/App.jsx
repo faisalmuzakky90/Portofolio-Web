@@ -62,22 +62,39 @@ export default function App() {
 
       {/* Clean Modern Navbar */}
       <header className="sticky top-0 z-40 border-b border-zinc-800/80 bg-[#09090b]/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <img 
-             src="/profile.png" 
-              alt="Faisal Muzakky" 
-              className="h-9 w-9 rounded-xl object-cover border border-zinc-800"
-            />
-            <div>
-              <span className="font-semibold tracking-tight text-zinc-100 text-sm">Faisal Muzakky</span>
-              <span className="block text-xs text-zinc-400">Software & Systems</span>
+        <div className="mx-auto flex max-w-6xl flex-col md:flex-row items-center justify-between px-6 py-3 md:py-4 gap-3 md:gap-0">
+          
+          {/* Baris Atas di HP: Logo & Tombol LinkedIn */}
+          <div className="w-full flex items-center justify-between md:w-auto">
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <img 
+                src="/profile.png" 
+                alt="Faisal Muzakky" 
+                className="h-9 w-9 rounded-xl object-cover border border-zinc-800"
+              />
+              <div>
+                <span className="font-semibold tracking-tight text-zinc-100 text-sm">Faisal Muzakky</span>
+                <span className="block text-xs text-zinc-400">Software & Systems</span>
+              </div>
+            </div>
+
+            {/* Tombol LinkedIn khusus tampilan HP */}
+            <div className="flex md:hidden items-center gap-3">
+              <a
+                href="https://www.linkedin.com/in/faisal-muzakky-219793412?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-100 px-3 py-1.5 text-xs font-semibold text-zinc-950 transition-colors hover:bg-white"
+              >
+                <LinkedinIcon className="h-3.5 w-3.5" />
+                <span>LinkedIn</span>
+              </a>
             </div>
           </div>
 
-          {/* Nav Links - tengah */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Nav Links - Scrollable horizontal di HP, Tengah di Laptop */}
+          <nav className="flex w-full md:w-auto items-center gap-1 overflow-x-auto no-scrollbar py-1 md:py-0">
             {[
               { label: 'Tentang', href: '#about' },
               { label: 'Proyek', href: '#projects' },
@@ -90,15 +107,15 @@ export default function App() {
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-lg px-3 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:bg-zinc-900 hover:text-zinc-100"
+                className="shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:bg-zinc-900 hover:text-zinc-100"
               >
                 {item.label}
               </a>
             ))}
           </nav>
 
-          {/* Kanan - Status badge + LinkedIn */}
-          <div className="flex items-center gap-3">
+          {/* Kanan - Status badge + LinkedIn (Hanya tampil di Laptop/Desktop) */}
+          <div className="hidden md:flex items-center gap-3">
             <div className="hidden lg:flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-3 py-1 text-xs text-zinc-300">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               Tersedia untuk Magang & Kolaborasi
@@ -114,6 +131,7 @@ export default function App() {
               <span>LinkedIn</span>
             </a>
           </div>
+
         </div>
       </header>
 
