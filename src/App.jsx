@@ -60,7 +60,7 @@ export default function App() {
       <div className="pointer-events-none fixed inset-0 z-0 radial-glow" />
 
 
-      {/* Clean Modern Navbar */}
+      {/* Clean Modern Navbar */}c
       <header className="sticky top-0 z-40 border-b border-zinc-800/80 bg-[#09090b]/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl flex-col md:flex-row items-center justify-between px-6 py-3 md:py-4 gap-3 md:gap-0">
           
@@ -100,8 +100,8 @@ export default function App() {
               { label: 'Proyek', href: '#projects' },
               { label: 'Keahlian', href: '#skills' },
               { label: 'Pendidikan', href: '#education' },
-              { label: 'Tabel', href: '#table-section' },
-              { label: 'Formulir', href: '#form-section' },
+              { label: 'Dokumentasi', href: '#table-section' },
+              { label: 'Pesan', href: '#form-section' },
               { label: 'Kontak', href: '#contact' },
             ].map((item) => (
               <a
@@ -508,7 +508,10 @@ export default function App() {
             </div>
           </SpotlightCard>
 
-          {/* 7. Connect / Contact Section (Bento Span 12 - Full Width) */}
+          {/* Bagian Tabel (Dokumentasi) & Form (Pesan) */}
+          <ContactAndTable />
+
+          {/* 7. Connect / Contact Section (Bento Span 12 - Full Width - Sekarang Paling Bawah) */}
           <SpotlightCard
             id="contact"
             className="md:col-span-12 scroll-mt-24"
@@ -563,7 +566,6 @@ export default function App() {
               </div>
             </div>
           </SpotlightCard>
-          <ContactAndTable />
 
         </div>
       </main>
