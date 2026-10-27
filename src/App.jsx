@@ -60,7 +60,7 @@ export default function App() {
       <div className="pointer-events-none fixed inset-0 z-0 radial-glow" />
 
 
-      {/* Clean Modern Navbar */}c
+      {/* Clean Modern Navbar */}
       <header className="sticky top-0 z-40 border-b border-zinc-800/80 bg-[#09090b]/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl flex-col md:flex-row items-center justify-between px-6 py-3 md:py-4 gap-3 md:gap-0">
           
