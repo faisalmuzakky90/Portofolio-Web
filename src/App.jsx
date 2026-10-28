@@ -543,7 +543,7 @@ export default function App() {
                 </a>
 
                 <a
-                  href="https://github.com/faisalmuzakky90/Magic-Tiles-Indonesia"
+                  href="https://github.com/faisalmuzakky90"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/60 px-4 py-2.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-white"
