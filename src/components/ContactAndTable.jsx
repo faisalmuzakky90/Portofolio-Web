@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import {
   Mail, Send, Check, FolderGit2, Calendar, Tag, Activity,
-  User, MessageSquare, ChevronDown, BookOpen, Code2, Globe, Loader2
+  User, MessageSquare, ChevronDown, BookOpen, Code2, Globe, Loader2,
+  Search, X
 } from 'lucide-react';
 import SpotlightCard from './reactbits/SpotlightCard';
 
@@ -96,6 +97,21 @@ export default function ContactAndTable() {
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [hoveredRow, setHoveredRow] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filter logika JavaScript untuk tabel proyek
+  const filteredRows = projectRows.filter((row) => {
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return true;
+    return (
+      row.name.toLowerCase().includes(q) ||
+      row.category.toLowerCase().includes(q) ||
+      row.tech.toLowerCase().includes(q) ||
+      row.year.includes(q) ||
+      row.role.toLowerCase().includes(q) ||
+      row.status.toLowerCase().includes(q)
+    );
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -144,7 +160,7 @@ export default function ContactAndTable() {
         spotlightColor="rgba(255, 255, 255, 0.05)"
       >
         {/* Header tabel */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-5">
           <div>
             <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-zinc-500 mb-1">
               <FolderGit2 className="h-4 w-4 text-zinc-400" />
@@ -157,11 +173,35 @@ export default function ContactAndTable() {
               Kumpulan proyek, studi, dan kegiatan yang telah diikuti selama masa studi.
             </p>
           </div>
-          {/* Summary badge */}
-          <div className="flex shrink-0 items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/60 px-4 py-2 text-xs text-zinc-300">
-            <Activity className="h-3.5 w-3.5 text-emerald-400" />
-            <span className="font-semibold text-white">{projectRows.length}</span>
-            <span className="text-zinc-500">Total Entri</span>
+
+          {/* Search bar input live filter */}
+          <div className="flex items-center gap-2">
+            <div className="relative w-full sm:w-64">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-500" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Cari proyek, teknologi..."
+                className="w-full rounded-xl border border-zinc-800 bg-zinc-900/80 pl-9 pr-8 py-2 text-xs text-zinc-200 placeholder-zinc-500 transition-colors focus:border-zinc-600 focus:outline-none"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              )}
+            </div>
+
+            {/* Counter badge */}
+            <div className="hidden sm:flex shrink-0 items-center gap-1.5 rounded-xl border border-zinc-800 bg-zinc-900/60 px-3 py-2 text-xs text-zinc-400 font-mono">
+              <span className="font-semibold text-white">{filteredRows.length}</span>
+              <span>/</span>
+              <span>{projectRows.length}</span>
+            </div>
           </div>
         </div>
 
@@ -180,47 +220,55 @@ export default function ContactAndTable() {
               </tr>
             </thead>
             <tbody>
-              {projectRows.map((row, i) => (
-                <tr
-                  key={row.id}
-                  onMouseEnter={() => setHoveredRow(i)}
-                  onMouseLeave={() => setHoveredRow(null)}
-                  className={`
-                    border-b border-zinc-800/50 transition-colors duration-150 text-sm
-                    ${hoveredRow === i ? 'bg-zinc-900/70' : i % 2 === 0 ? 'bg-transparent' : 'bg-zinc-900/20'}
-                  `}
-                >
-                  <td className="px-4 py-3.5 font-mono text-xs text-zinc-600">{row.id}</td>
-                  <td className="px-4 py-3.5 font-semibold text-white">{row.name}</td>
-                  <td className="px-4 py-3.5">
-                    <span className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-[11px] font-medium text-zinc-300">
-                      {categoryIcon[row.category]}
-                      {row.category}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3.5 text-xs text-zinc-400 font-mono">{row.tech}</td>
-                  <td className="px-4 py-3.5 text-center">
-                    <span className="inline-flex items-center gap-1 text-xs text-zinc-400">
-                      <Calendar className="h-3 w-3 text-zinc-600" />
-                      {row.year}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3.5 text-center text-xs text-zinc-400">{row.role}</td>
-                  <td className="px-4 py-3.5 text-center">
-                    <span className={`inline-flex items-center gap-1.5 text-xs ${statusStyle(row.status)}`}>
-                      <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${statusDot(row.status)}`} />
-                      {row.status}
-                    </span>
+              {filteredRows.length > 0 ? (
+                filteredRows.map((row, i) => (
+                  <tr
+                    key={row.id}
+                    onMouseEnter={() => setHoveredRow(i)}
+                    onMouseLeave={() => setHoveredRow(null)}
+                    className={`
+                      border-b border-zinc-800/50 transition-colors duration-150 text-sm
+                      ${hoveredRow === i ? 'bg-zinc-900/70' : i % 2 === 0 ? 'bg-transparent' : 'bg-zinc-900/20'}
+                    `}
+                  >
+                    <td className="px-4 py-3.5 font-mono text-xs text-zinc-600">{row.id}</td>
+                    <td className="px-4 py-3.5 font-semibold text-white">{row.name}</td>
+                    <td className="px-4 py-3.5">
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-[11px] font-medium text-zinc-300">
+                        {categoryIcon[row.category]}
+                        {row.category}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3.5 text-xs text-zinc-400 font-mono">{row.tech}</td>
+                    <td className="px-4 py-3.5 text-center">
+                      <span className="inline-flex items-center gap-1 text-xs text-zinc-400">
+                        <Calendar className="h-3 w-3 text-zinc-600" />
+                        {row.year}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3.5 text-center text-xs text-zinc-400">{row.role}</td>
+                    <td className="px-4 py-3.5 text-center">
+                      <span className={`inline-flex items-center gap-1.5 text-xs ${statusStyle(row.status)}`}>
+                        <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${statusDot(row.status)}`} />
+                        {row.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={7} className="px-4 py-8 text-center text-sm text-zinc-500">
+                    Tidak ada data proyek yang cocok dengan kata kunci "{searchQuery}"
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
 
         {/* Footer info */}
         <div className="mt-4 flex items-center justify-between text-[11px] text-zinc-600">
-          <span>Terakhir diperbarui: Oktober 2026</span>
+          <span>{filteredRows.length} dari {projectRows.length} entri ditampilkan</span>
           <span>{projectRows.filter(r => r.status === 'Selesai').length} selesai · {projectRows.filter(r => r.status !== 'Selesai').length} berjalan</span>
         </div>
       </SpotlightCard>
