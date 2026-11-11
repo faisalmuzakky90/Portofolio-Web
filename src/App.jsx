@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
   Code2, 
   MapPin, 
@@ -18,23 +18,17 @@ import {
 } from 'lucide-react';
 import { LinkedinIcon, GithubIcon, InstagramIcon } from './components/Icons';
 
-// React Bits & Custom Components
+// React Bits Components
 import SpotlightCard from './components/reactbits/SpotlightCard';
 import Galaxy from './components/reactbits/Galaxy';
 import GradientText from './components/reactbits/GradientText';
 import ShinyText from './components/reactbits/ShinyText';
 import ContactAndTable from './components/ContactAndTable';
-import DigitalClockBadge from './components/DigitalClockBadge';
-import { printConsoleWelcome } from './lib/clockUtils';
 
 export default function App() {
   const [copied, setCopied] = useState(false);
   const [selectedPdf, setSelectedPdf] = useState(null); // { title: string, file: string }
   const email = "faisalmuzakky90@gmail.com";
-
-  useEffect(() => {
-    printConsoleWelcome();
-  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(email);
@@ -85,17 +79,16 @@ export default function App() {
               </div>
             </div>
 
-            {/* Kanan atas di HP: Jam Digital Mini & LinkedIn */}
-            <div className="flex md:hidden items-center gap-2">
-              <DigitalClockBadge />
+            {/* Tombol LinkedIn khusus tampilan HP */}
+            <div className="flex md:hidden items-center gap-3">
               <a
                 href="https://www.linkedin.com/in/faisal-muzakky-219793412?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-700 bg-zinc-100 px-2.5 py-1 text-xs font-semibold text-zinc-950 transition-colors hover:bg-white"
+                className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-100 px-3 py-1.5 text-xs font-semibold text-zinc-950 transition-colors hover:bg-white"
               >
                 <LinkedinIcon className="h-3.5 w-3.5" />
-                <span className="hidden xs:inline">LinkedIn</span>
+                <span>LinkedIn</span>
               </a>
             </div>
           </div>
@@ -121,13 +114,11 @@ export default function App() {
             ))}
           </nav>
 
-          {/* Kanan - Jam Digital Realtime JS + Status badge + LinkedIn */}
+          {/* Kanan - Status badge + LinkedIn (Hanya tampil di Laptop/Desktop) */}
           <div className="hidden md:flex items-center gap-3">
-            <DigitalClockBadge />
-
-            <div className="hidden xl:flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-3 py-1 text-xs text-zinc-300">
+            <div className="hidden lg:flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-3 py-1 text-xs text-zinc-300">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Tersedia untuk Magang
+              Tersedia untuk Magang & Kolaborasi
             </div>
 
             <a
